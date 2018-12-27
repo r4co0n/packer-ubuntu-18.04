@@ -40,7 +40,6 @@
             ["modifyvm", "{{.Name}}", "--audio", "none"],
             ["modifyvm", "{{.Name}}", "--usb", "off"],
             ["modifyvm", "{{.Name}}", "--vram", "12"],
-            ["modifyvm", "{{.Name}}", "--vrde", "off"],
             [
                 "modifyvm",
                 "{{.Name}}",
