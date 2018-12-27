@@ -13,3 +13,5 @@ box/
 # Ignore KDevelop project files
 /*.kdev4
 
+# Ignore output directory
+/output-ubuntu-18.04-virtualbox-iso
