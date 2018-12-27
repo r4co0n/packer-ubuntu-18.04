@@ -36,6 +36,7 @@
         "ssh_username": "{{ user `ssh_username` }}",
         "ssh_wait_timeout": "10000s",
         "type": "virtualbox-iso",
+        "format": "ova",
         "vboxmanage": [
             ["modifyvm", "{{.Name}}", "--audio", "none"],
             ["modifyvm", "{{.Name}}", "--usb", "off"],
