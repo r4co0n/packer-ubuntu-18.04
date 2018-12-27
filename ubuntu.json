@@ -9,7 +9,6 @@
             " debian-installer=en_GB locale=en_GB keymap=de",
             " debian-installer/country=de debian-installer/language=en",
             " console_setup/ask_detect=false console-setup/layoutcode=de",
-            " ",
             " hostname={{ user `hostname` }}",
             " grub-installer/bootdev=/dev/sda",
             " debconf/frontend=noninteractive",
