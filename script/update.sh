@@ -4,7 +4,7 @@
 echo "==> Configuring locales"
 apt-get -y purge language-pack-en language-pack-gnome-en
 sed -i -e '/^[^# ]/s/^/# /' /etc/locale.gen
-LANG=en_US.UTF-8
+LANG=en_GB.UTF-8
 LC_ALL=$LANG
 locale-gen --purge $LANG
 update-locale LANG=$LANG LC_ALL=$LC_ALL
@@ -19,7 +19,7 @@ systemctl disable apt-daily.timer
 systemctl mask apt-daily.service
 systemctl daemon-reload
 
-apt-get -y install ssh
+apt-get -y install ssh vi
 apt-get -y autoclean
 apt-get -y clean
 
