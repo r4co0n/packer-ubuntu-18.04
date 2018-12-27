@@ -9,3 +9,7 @@ iso/
 box/
 
 .DS_Store
+
+# Ignore KDevelop project files
+/*.kdev4
+
