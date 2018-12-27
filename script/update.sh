@@ -19,15 +19,7 @@ systemctl disable apt-daily.timer
 systemctl mask apt-daily.service
 systemctl daemon-reload
 
-# install packages and upgrade
-echo "==> Updating list of repositories"
-apt-get -y update
-if [[ $UPDATE  =~ true || $UPDATE =~ 1 || $UPDATE =~ yes ]]; then
-    apt-get -y dist-upgrade
-    apt-get -y autoremove --purge
-fi
-apt-get -y install build-essential linux-headers-generic
-apt-get -y install ssh nfs-common vim curl perl git
+apt-get -y install ssh
 apt-get -y autoclean
 apt-get -y clean
 
@@ -42,6 +34,7 @@ sed -i -e 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' \
     -e 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="quiet nosplash"/' \
     /etc/default/grub
 update-grub
+
 # SSH tweaks
 echo "UseDNS no" >> /etc/ssh/sshd_config
 

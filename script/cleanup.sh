@@ -2,23 +2,19 @@
 
 SSH_USER=${SSH_USERNAME:-vagrant}
 
+DISK_USAGE_BEFORE_CLEANUP=$(df -h)
+
 # Make sure udev does not block our network - http://6.ptmc.org/?p=164
 echo "==> Cleaning up udev rules"
 rm -rf /dev/.udev/
 rm -f /lib/udev/rules.d/75-persistent-net-generator.rules
 
 echo "==> Cleaning up leftover dhcp leases"
-# Ubuntu 10.04
-if [ -d "/var/lib/dhcp3" ]; then
-    rm /var/lib/dhcp3/*
-fi
-# Ubuntu 12.04 & 14.04
-if [ -d "/var/lib/dhcp" ]; then
-    rm /var/lib/dhcp/*
-fi
+rm /var/lib/dhcp/*
+
 
 # Add delay to prevent "vagrant reload" from failing
-echo "pre-up sleep 2" >> /etc/network/interfaces
+#echo "pre-up sleep 2" >> /etc/network/interfaces
 
 echo "==> Cleaning up tmp"
 rm -rf /tmp/*
@@ -29,8 +25,6 @@ apt-get -y clean
 
 echo "==> Installed packages"
 dpkg --get-selections | grep -v deinstall
-
-DISK_USAGE_BEFORE_CLEANUP=$(df -h)
 
 # Remove Bash history
 unset HISTFILE
