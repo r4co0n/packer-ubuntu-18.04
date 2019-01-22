@@ -10,6 +10,7 @@
             " debian-installer/country=DE debian-installer/language=en",
             " console_setup/ask_detect=false console-setup/layoutcode=de",
             " hostname={{ user `hostname` }}",
+            " netcfg/do_not_use_netplan=true",
             " grub-installer/bootdev=/dev/sda",
             " debconf/frontend=noninteractive",
             " debconf/priority=critical",
