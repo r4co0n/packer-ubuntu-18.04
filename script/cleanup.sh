@@ -12,10 +12,6 @@ rm -f /lib/udev/rules.d/75-persistent-net-generator.rules
 echo "==> Cleaning up leftover dhcp leases"
 rm /var/lib/dhcp/*
 
-
-# Add delay to prevent "vagrant reload" from failing
-#echo "pre-up sleep 2" >> /etc/network/interfaces
-
 echo "==> Cleaning up tmp"
 rm -rf /tmp/*
 

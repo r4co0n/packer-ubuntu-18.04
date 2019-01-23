@@ -1,8 +1,8 @@
 #!/bin/bash -eu
 
-# locale
+# Reduce installed languages to just "en_US.UTF-8"
 echo "==> Configuring locales"
-apt-get -y purge language-pack-en language-pack-gnome-en
+apt-get -y purge language-pack-en language-pack-gnome-en language-selector-common
 sed -i -e '/^[^# ]/s/^/# /' /etc/locale.gen
 LANG=en_GB.UTF-8
 LC_ALL=$LANG
@@ -19,15 +19,24 @@ systemctl disable apt-daily.timer
 systemctl mask apt-daily.service
 systemctl daemon-reload
 
+# install packages and upgrade
+echo "==> Updating list of repositories"
+apt-get -y update
+if [[ $UPDATE  =~ true || $UPDATE =~ 1 || $UPDATE =~ yes ]]; then
+    apt-get -y dist-upgrade
+    apt-get -y autoremove --purge
+fi
 apt-get -y install ssh vi
 apt-get -y autoclean
 apt-get -y clean
 
 # Disable IPv6
-echo "==> Disabling IPv6"
-echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
-echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
-sysctl -p
+if [[ $DISABLE_IPV6 =~ true || $DISABLE_IPV6 =~ 1 || $DISABLE_IPV6 =~ yes ]]; then
+    echo "==> Disabling IPv6"
+    sed -i -e 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="ipv6.disable=1"/' \
+        /etc/default/grub
+    #update-grub
+fi
 
 # Remove 5s grub timeout to speed up booting
 sed -i -e 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' \
