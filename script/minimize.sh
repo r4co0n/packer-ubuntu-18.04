@@ -45,6 +45,7 @@ apt-get -y purge \
     lshw \
     ltrace \
     mtr-tiny \
+    netplan.io \
     ntfs-3g \
     popularity-contest \
     rsync \
@@ -55,6 +56,9 @@ apt-get -y purge \
     time \
     wireless-tools \
     wpasupplicant
+
+# Remove netplan.io's config as the packaging is insufficient
+rm -rf /etc/netplan
 
 # Clean up the apt cache
 apt-get -y autoremove --purge
